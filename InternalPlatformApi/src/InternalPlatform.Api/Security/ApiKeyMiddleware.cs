@@ -17,6 +17,12 @@ public sealed class ApiKeyMiddleware(RequestDelegate next, IOptions<ApiKeyOption
             return;
         }
 
+        if (context.Request.Path.StartsWithSegments("/openapi"))
+        {
+            await next(context);
+            return;
+        }
+
         // Validate config
         if (string.IsNullOrWhiteSpace(_opt.ApiKey))
         {

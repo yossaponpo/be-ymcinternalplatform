@@ -2,6 +2,9 @@ using InternalPlatform.Application.Abstractions.Persistence;
 using InternalPlatform.Infrastructure.Persistence;
 using InternalPlatform.Infrastructure.Persistence.Repositories;
 using Microsoft.Extensions.DependencyInjection;
+using InternalPlatform.Application.Abstractions.Reports;
+using InternalPlatform.Infrastructure.Reports;
+using InternalPlatform.Domain.Entities;
 
 namespace InternalPlatform.Infrastructure;
 
@@ -15,7 +18,9 @@ public static class DependencyInjection
             _ => new NpgsqlConnectionFactory(connectionString));
 
         services.AddScoped<ICustomerRepository, CustomerRepository>();
-
+        services.AddScoped<IPdfReportGenerator<IEnumerable<Customer>>, CustomerReportGenerator>();
+        services.AddScoped<IPayrollRepository, PayrollRepository>();
+        
         return services;
     }
 }
