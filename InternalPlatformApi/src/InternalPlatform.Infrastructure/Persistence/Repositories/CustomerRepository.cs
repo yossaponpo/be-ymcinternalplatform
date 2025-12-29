@@ -10,21 +10,23 @@ public sealed class CustomerRepository(IDbConnectionFactory db)
 {
     public async Task<IReadOnlyList<Customer>> GetAllAsync(CancellationToken ct)
     {
-        const string sql = """
-            select
-                customer_id   as "CustomerId",
-                customer_name as "CustomerName",
-                address       as "Address",
-                branch        as "Branch",
-                tax_no        as "TaxNo"
-            from customer
-            order by customer_name
-            """;
-
         using var conn = db.Create();
-        var cmd = new CommandDefinition(sql, cancellationToken: ct);
+        var cmd = new CommandDefinition(@"select *
+            from customer
+            order by customer_id", cancellationToken: ct);
 
         var result = await conn.QueryAsync<Customer>(cmd);
         return result.AsList();
+    }
+
+    public async Task<Customer?> GetByIdAsync(int customerId, CancellationToken ct)
+    {
+        using var conn = db.Create();
+        var cmd = new CommandDefinition(@"select *
+            from customer
+            where customer_id = @CustomerId", new { CustomerId = customerId }, cancellationToken: ct);
+
+        var result = await conn.QueryFirstOrDefaultAsync<Customer>(cmd);
+        return result;
     }
 }

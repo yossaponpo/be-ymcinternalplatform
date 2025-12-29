@@ -5,4 +5,5 @@ namespace InternalPlatform.Application.Abstractions.Persistence;
 public interface ICustomerRepository
 {
     Task<IReadOnlyList<Customer>> GetAllAsync(CancellationToken ct);
+    Task<Customer?> GetByIdAsync(int customerId, CancellationToken ct);
 }
