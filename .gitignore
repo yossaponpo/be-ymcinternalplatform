@@ -1,41 +1,117 @@
-# Prerequisites
-*.d
+# ======================================================
+# .NET / Visual Studio
+# ======================================================
+bin/
+obj/
+[Bb]in/
+[Oo]bj/
 
-# Compiled Object files
-*.slo
-*.lo
-*.o
-*.obj
+*.user
+*.suo
+*.rsuser
+*.userprefs
+*.stackdump
 
-# Precompiled Headers
-*.gch
-*.pch
+.vs/
+.vscode/
+.idea/
+*.swp
 
-# Linker files
-*.ilk
+# ======================================================
+# Build outputs
+# ======================================================
+dist/
+publish/
+artifacts/
 
-# Debugger Files
-*.pdb
+# ======================================================
+# Logs
+# ======================================================
+*.log
+logs/
+Logs/
 
-# Compiled Dynamic libraries
-*.so
-*.dylib
-*.dll
+# ======================================================
+# Test Results
+# ======================================================
+TestResults/
+*.trx
+*.coverage
+coverage/
+coverage.cobertura.xml
 
-# Fortran module files
-*.mod
-*.smod
+# ======================================================
+# ASP.NET / .NET Core
+# ======================================================
+*.dbmdl
+*.jfm
 
-# Compiled Static libraries
-*.lai
-*.la
-*.a
-*.lib
+# ======================================================
+# 🔒 Configuration / Secrets (EXCLUDE ALL appsettings)
+# ======================================================
+**/appsettings.json
+**/appsettings.*.json
+!**/appsettings.example.json
 
-# Executables
-*.exe
-*.out
-*.app
+# dotnet user-secrets
+**/*.secrets.json
+**/secrets.json
 
-# debug information files
-*.dwo
+# Environment files
+.env
+.env.*
+!.env.example
+
+# ======================================================
+# PostgreSQL / Database
+# ======================================================
+*.dump
+*.sql~
+*.bak
+
+# ======================================================
+# Packages / Caches
+# ======================================================
+packages/
+.nuget/
+NUGET_PACKAGES/
+
+# ======================================================
+# Node / Frontend (if any)
+# ======================================================
+node_modules/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# ======================================================
+# OS files
+# ======================================================
+Thumbs.db
+ehthumbs.db
+Desktop.ini
+
+.DS_Store
+.AppleDouble
+.LSOverride
+
+# ======================================================
+# Temporary / Backup
+# ======================================================
+*.tmp
+*.temp
+*.bak
+*.old
+*.orig
+*.retry
+
+# ======================================================
+# Rider / ReSharper
+# ======================================================
+_ReSharper*/
+*.DotSettings.user
+
+# ======================================================
+# Visual Studio Code
+# ======================================================
+.history/
