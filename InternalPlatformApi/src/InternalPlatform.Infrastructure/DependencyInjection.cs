@@ -20,7 +20,7 @@ public static class DependencyInjection
         services.AddScoped<ICustomerRepository, CustomerRepository>();
         services.AddScoped<IPdfReportGenerator<IEnumerable<Customer>>, CustomerReportGenerator>();
         services.AddScoped<IPayrollRepository, PayrollRepository>();
-        
+        services.AddScoped<ISellRepository, SellRepository>();
         return services;
     }
 }
