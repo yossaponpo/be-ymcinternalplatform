@@ -2,10 +2,18 @@
 
   <ItemGroup>
     <ProjectReference Include="..\InternalPlatform.Application\InternalPlatform.Application.csproj" />
-    <ProjectReference Include="..\InternalPlatform.Infrastructure\InternalPlatform.Infrastructure.csproj" />
+    <ProjectReference
+      Include="..\InternalPlatform.Infrastructure\InternalPlatform.Infrastructure.csproj" />
   </ItemGroup>
 
   <ItemGroup>
+    <Content Include="Fonts\**\*.ttf">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Images\**\*.*">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+
     <PackageReference Include="Microsoft.AspNetCore.OpenApi" Version="10.0.1" />
   </ItemGroup>
 

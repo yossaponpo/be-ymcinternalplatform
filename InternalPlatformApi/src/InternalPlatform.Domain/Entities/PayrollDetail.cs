@@ -9,6 +9,7 @@ public class PayrollDetail
     public string EmployeeNo { get; init; } = "";
 
     public decimal WorkingDay { get; init; }
+    public decimal WorkingDayAmount { get; init; }
 
     public decimal PayRate { get; init; }
 
@@ -23,6 +24,9 @@ public class PayrollDetail
     public decimal HolidayOtHour { get; init; }
 
     public decimal HolidayOtAmount { get; init; }
+
+    public decimal PublicHoliday { get; init; }
+    public decimal PublicHolidayAmount { get; init; }
 
     public decimal AttendanceBonus { get; init; }
 

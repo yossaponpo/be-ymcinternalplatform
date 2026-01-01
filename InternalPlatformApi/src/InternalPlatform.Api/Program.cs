@@ -12,6 +12,7 @@ using InternalPlatform.Application.Features.Sells.CreateInvoice;
 using InternalPlatform.Application.Features.Sells.CreateReceipt;
 using InternalPlatform.Application.Features.Sells.PatchInvoice;
 using InternalPlatform.Application.Features.Sells.PatchReceipt;
+using InternalPlatform.Application.Features.Reports.Payrolls;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -36,6 +37,8 @@ builder.Services.AddScoped<CreateInvoiceHandler>();
 builder.Services.AddScoped<CreateReceiptHandler>();
 builder.Services.AddScoped<PatchInvoiceHandler>();
 builder.Services.AddScoped<PatchReceiptHandler>();
+builder.Services.AddScoped<GeneratePayrollPdfHandler>();
+builder.Services.AddScoped<GenerateSlipPdfHandler>();
 builder.Services.AddEndpointsApiExplorer();
 
 var app = builder.Build();

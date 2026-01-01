@@ -21,6 +21,8 @@ public static class DependencyInjection
         services.AddScoped<IPdfReportGenerator<IEnumerable<Customer>>, CustomerReportGenerator>();
         services.AddScoped<IPayrollRepository, PayrollRepository>();
         services.AddScoped<ISellRepository, SellRepository>();
+        services.AddScoped<IReportPayRollRepository, ReportPayRollRepository>();
+        services.AddScoped<IReportSlipRepository, ReportSlipRepository>();
         return services;
     }
 }
