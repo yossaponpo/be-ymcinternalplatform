@@ -66,6 +66,7 @@ SET
         var cmdData = new CommandDefinition(@"select *
             from employee
             where employee_no like @EmployeeNo or first_name like @FirstName or last_name like @LastName
+            order by employee_no
             offset @Offset rows
             fetch next @PageSize rows only",new {EmployeeNo = input.EmployeeNo.ToLikeSQL(), FirstName = input.FirstName.ToLikeSQL(), LastName = input.LastName.ToLikeSQL(),Offset = input.StartIndex,PageSize = input.MaxRecords}, cancellationToken: ct);
         var result = await conn.QueryAsync<Employee>(cmdData);
@@ -74,5 +75,15 @@ SET
             CountItems = count,
             Items = result.ToList()
         };
+    }
+
+    public async Task<Employee> GetEmployeeAsync(string employeeNo, CancellationToken ct)
+    {
+        using var conn = db.Create();
+        var cmd = new CommandDefinition(@"select *
+            from employee
+            where employee_no = @EmployeeNo", new { EmployeeNo = employeeNo }, cancellationToken: ct);
+        var result = await conn.QuerySingleOrDefaultAsync<Employee>(cmd);
+        return result!;
     }
 }

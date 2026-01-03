@@ -47,6 +47,18 @@ public static class MasterEndpoints
         })
         .WithName("SearchEmployee");
 
+        app.MapGet("/master/employees/{employeeNo}", async (
+            string employeeNo,
+            HttpContext http,
+            CancellationToken ct) =>
+        {
+            var handler = http.RequestServices.GetRequiredService<GetEmployeeByIdHandler>();
+            var response = await handler.HandleAsync(employeeNo, ct);
+
+            return Results.Ok(response);
+        })
+        .WithName("GetEmployeeById");
+
         
         return app;
     }

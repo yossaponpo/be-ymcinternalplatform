@@ -51,6 +51,7 @@ builder.Services.AddScoped<GetAllEmployeesHandler>();
 builder.Services.AddScoped<AddEditEmployeeHandler>();
 builder.Services.AddScoped<SearchEmployeeHandler>();
 builder.Services.AddScoped<StatCardHandler>();
+builder.Services.AddScoped<GetEmployeeByIdHandler>();
 builder.Services.AddEndpointsApiExplorer();
 
 builder.Services.AddCors(options =>
