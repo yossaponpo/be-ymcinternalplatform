@@ -16,7 +16,7 @@ obj/
 .vscode/
 .idea/
 *.swp
-*lanuchSettings.json
+
 # ======================================================
 # Build outputs
 # ======================================================
@@ -52,6 +52,7 @@ coverage.cobertura.xml
 **/appsettings.json
 **/appsettings.*.json
 !**/appsettings.example.json
+**/lanuchSettings.json
 
 # dotnet user-secrets
 **/*.secrets.json
@@ -115,3 +116,4 @@ _ReSharper*/
 # Visual Studio Code
 # ======================================================
 .history/
+InternalPlatformApi/src/InternalPlatform.Api/Properties/launchSettings.json
