@@ -3,9 +3,9 @@ using Microsoft.Extensions.Options;
 
 namespace InternalPlatform.Api.Security;
 
-public sealed class ApiKeyMiddleware(RequestDelegate next, IOptions<ApiKeyOptions> options)
+public sealed class ApiKeyMiddleware(RequestDelegate next)
 {
-    private readonly ApiKeyOptions _opt = options.Value;
+    private readonly ApiKeyOptions _opt = new();
 
     public async Task InvokeAsync(HttpContext context)
     {

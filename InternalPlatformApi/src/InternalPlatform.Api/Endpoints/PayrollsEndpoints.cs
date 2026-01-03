@@ -1,6 +1,8 @@
 using InternalPlatform.Application.Features.Payrolls.CreatePayroll;
 using InternalPlatform.Application.Features.Payrolls.GetPayrollById;
 using InternalPlatform.Application.Features.Payrolls.PatchPayroll;
+using InternalPlatform.Application.Features.Payrolls.SearchPayroll;
+using InternalPlatform.Domain.DataModels;
 using InternalPlatform.Domain.Entities;
 using Microsoft.Extensions.DependencyInjection;
 
@@ -52,6 +54,20 @@ public static class PayrollsEndpoints
             return ok ? Results.NoContent() : Results.NotFound();
         })
         .WithName("PatchPayroll");
+
+        app.MapPost("/payrolls/search", async (
+            SearchPayRollInput req,
+            HttpContext http,
+            CancellationToken ct) =>
+        {
+            var handler = http.RequestServices.GetRequiredService<SearchPayrollHandler>();
+
+            var result = await handler.HandleAsync(req, ct);
+
+            return Results.Ok(result);
+        })
+        .WithName("SearchPayroll");
+
 
         return app;
     }

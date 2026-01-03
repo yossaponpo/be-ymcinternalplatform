@@ -13,18 +13,22 @@ using InternalPlatform.Application.Features.Sells.CreateReceipt;
 using InternalPlatform.Application.Features.Sells.PatchInvoice;
 using InternalPlatform.Application.Features.Sells.PatchReceipt;
 using InternalPlatform.Application.Features.Reports.Payrolls;
+using InternalPlatform.Application.Features.Auth;
+using InternalPlatform.Application.Features.Payrolls.SearchPayroll;
+using InternalPlatform.Application.Features.Payrolls.GetPayrollById;
+using InternalPlatform.Application.Features.Masters;
+using InternalPlatform.Application.Features.Dashboards;
 
 var builder = WebApplication.CreateBuilder(args);
 
 Dapper.DefaultTypeMap.MatchNamesWithUnderscores = true;
 
 // register services FIRST
-var cs = builder.Configuration.GetConnectionString("Default")
-         ?? throw new InvalidOperationException("ConnectionStrings:Default is missing");
+var cs = Environment.GetEnvironmentVariable("ConnectionStrings")
+         ?? throw new InvalidOperationException("ConnectionStrings is missing");
 builder.Services.AddOpenApi();
 builder.Services.AddInfrastructure(cs);
 
-builder.Services.Configure<ApiKeyOptions>(builder.Configuration.GetSection("Security"));
 
 builder.Services.AddScoped<GetCustomersHandler>();
 builder.Services.AddScoped<GetCustomerByIdHandler>();
@@ -39,16 +43,36 @@ builder.Services.AddScoped<PatchInvoiceHandler>();
 builder.Services.AddScoped<PatchReceiptHandler>();
 builder.Services.AddScoped<GeneratePayrollPdfHandler>();
 builder.Services.AddScoped<GenerateSlipPdfHandler>();
+builder.Services.AddScoped<LoginHandler>();
+builder.Services.AddScoped<EncryptHandler>();
+builder.Services.AddScoped<SearchPayrollHandler>();
+builder.Services.AddScoped<GetPayrollByIdHandler>();
+builder.Services.AddScoped<GetAllEmployeesHandler>();
+builder.Services.AddScoped<AddEditEmployeeHandler>();
+builder.Services.AddScoped<SearchEmployeeHandler>();
+builder.Services.AddScoped<StatCardHandler>();
 builder.Services.AddEndpointsApiExplorer();
+
+builder.Services.AddCors(options =>
+{
+    options.AddPolicy("Frontend", policy =>
+    {
+        policy.AllowAnyOrigin()
+              .AllowAnyMethod()
+              .AllowAnyHeader();
+    });
+});
 
 var app = builder.Build();
 
+app.UseCors("Frontend");
 app.UseMiddleware<ApiKeyMiddleware>();
-
 app.MapOpenApi("/openapi/v1.json");
-
 app.MapCustomersEndpoints();
 app.MapReportsEndpoints();
 app.MapPayrollsEndpoints();
 app.MapSellsEndpoints();
+app.MapMasterEndpoints();
+app.MapAuthEndpoints();
+app.MapDashboardEndpoints();
 app.Run();
