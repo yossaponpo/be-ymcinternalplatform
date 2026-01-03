@@ -5,17 +5,17 @@ FROM mcr.microsoft.com/dotnet/sdk:10.0 AS build
 WORKDIR /src
 
 # Copy the solution file and project files
-COPY ["InternalPlatformApi.sln", "./"]
-COPY ["src/InternalPlatform.Api/InternalPlatform.Api.csproj", "src/InternalPlatform.Api/"]
-COPY ["src/InternalPlatform.Application/InternalPlatform.Application.csproj", "src/InternalPlatform.Application/"]
-COPY ["src/InternalPlatform.Domain/InternalPlatform.Domain.csproj", "src/InternalPlatform.Domain/"]
-COPY ["src/InternalPlatform.Infrastructure/InternalPlatform.Infrastructure.csproj", "src/InternalPlatform.Infrastructure/"]
+COPY ["InternalPlatformApi/InternalPlatformApi.sln", "./"]
+COPY ["InternalPlatformApi/src/InternalPlatform.Api/InternalPlatform.Api.csproj", "src/InternalPlatform.Api/"]
+COPY ["InternalPlatformApi/src/InternalPlatform.Application/InternalPlatform.Application.csproj", "src/InternalPlatform.Application/"]
+COPY ["InternalPlatformApi/src/InternalPlatform.Domain/InternalPlatform.Domain.csproj", "src/InternalPlatform.Domain/"]
+COPY ["InternalPlatformApi/src/InternalPlatform.Infrastructure/InternalPlatform.Infrastructure.csproj", "src/InternalPlatform.Infrastructure/"]
 
 # Restore dependencies
 RUN dotnet restore "src/InternalPlatform.Api/InternalPlatform.Api.csproj"
 
 # Copy the rest of the source code
-COPY . .
+COPY InternalPlatformApi/. .
 
 # Build the application
 WORKDIR "/src/src/InternalPlatform.Api"
